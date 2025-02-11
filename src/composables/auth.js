@@ -16,6 +16,7 @@ export function auth(){
     const   AuthenticatedUser = async () => {
             const res= await axios.get(base_url.value+'user', authHeader);
             currentUser.value = res.data
+        // console.log(res)
     }
 
 
