@@ -3,6 +3,7 @@ import Register from "@/auth/Register.vue";
 import ForgotPassword from "@/auth/ForgotPassword.vue";
 import Otp from "@/auth/Otp.vue";
 import ResetPassword from "@/auth/ResetPassword.vue";
+import Profile from "@/auth/Profile.vue";
 
 const routes =[
     {
@@ -24,6 +25,10 @@ const routes =[
     {
         path: '/auth/reset_password/:email/:otp',
         component: ResetPassword
+    },
+    {
+        path: '/user/profile',
+        component: Profile
     }
 ]
 export default routes

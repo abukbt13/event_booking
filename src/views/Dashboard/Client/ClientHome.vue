@@ -45,7 +45,7 @@ const  CreateEvent = async () =>{
   <div class="sidebar">
     <ul class="sidebar-links list-unstyled">
 
-        <router-link class="text-decoration-none" to="/events">  <li> Events</li></router-link>
+        <router-link class="text-decoration-none" to="/user/events">  <li> Events</li></router-link>
 
 
       <router-link  class="text-decoration-none"  to="/bookings"> <li>Bookings </li></router-link>

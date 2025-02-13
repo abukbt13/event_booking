@@ -2,7 +2,7 @@ import AdminHome from "@/views/Dashboard/Admin/AdminHome.vue";
 
 const routes =[
     {
-        path: '/admin',
+        path: '/admin/dashboard',
         component: AdminHome,
     }
 ]

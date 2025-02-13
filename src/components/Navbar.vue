@@ -37,20 +37,16 @@ onMounted(()=>{
           <div class="d-flex column" v-if="currentUser.first_name">
             <div  class="d-flex column" v-if="currentUser.role === 1 ">
               <li class="nav-item text-uppercase">
-                <router-link class="nav-link  text-white" to="/user/dashboard">Dashboard</router-link>
-              </li>
-              <li class="nav-item text-uppercase">
-                <router-link class="nav-link  text-white" to="/admin/admin">Admin</router-link>
+                <router-link class="nav-link  text-white" to="/dashboard">Dashboard</router-link>
               </li>
             </div>
             <div  class="" v-else>
               <li class="nav-item text-uppercase">
-                <router-link class="nav-link text-white" to="/user/dashboard">Dashboard</router-link>
+                <router-link class="nav-link text-white" to="/dashboard">Dashboard</router-link>
               </li>
             </div>
             <router-link to="/user/profile" class="nav-item text-uppercase">
-              <img width="50" v-if="!currentUser.picture" style="border-radius: 50%;" height="50"  :src="storage + 'Profiles/'+currentUser.profile"  alt="">
-              <img width="50" v-else-if="currentUser.picture"  style="border-radius: 50%;" height="50"  src="/user.png"  alt="">
+              <img height="50" style="border-radius: 50%"  src="/user.png"  alt="">
             </router-link>
           </div>
 
