@@ -120,7 +120,7 @@ onMounted(()=>{
             <input type="number"  v-model="capacity" class="form-control">
 
             <label for="document" class="mt-2">amenities</label>
-            <input type="number"  v-model="amenities" class="form-control">
+            <input type="text"  v-model="amenities" class="form-control">
 
             <label for="document" class="mt-2">Capacity</label>
             <input type="number"  v-model="capacity" class="form-control">
@@ -129,9 +129,9 @@ onMounted(()=>{
             <input type="number"  v-model="price_per_hour" class="form-control">
 
             <label for="document" class="mt-2">contact_email</label>
-            <input type="number"  v-model="contact_email" class="form-control">
+            <input type="text"  v-model="contact_email" class="form-control">
 
-            <label for="document" class="mt-2">contact_email</label>
+            <label for="document" class="mt-2">Contact_Phone</label>
             <input type="contact_phone"  v-model="contact_phone" class="form-control">
             <div class="d-flex justify-content-around mt-3">
               <button type="submit" class="btn btn-primary">Submit</button>
