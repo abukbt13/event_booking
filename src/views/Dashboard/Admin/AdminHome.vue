@@ -71,18 +71,12 @@ onMounted(()=>{
     <div class="contents mx-2 ">
       <table  class="table mt-1 border table-hover table-bordered">
         <!-- Table Header -->
+
         <tr>
-          <th colspan="6" class="text-uppercase">
-            <div class="d-flex justify-content-between"><div class="">Venues</div>
-              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#venue">Create</button>
-            </div>
-          </th>
-        </tr>
-        <tr>
-          <th class="border">venue</th>
-          <th class="border">location </th>
-          <th class="border">capacity</th>
-          <th class="border">Action</th>
+          <td class="border">venue</td>
+          <td class="border">location </td>
+          <td class="border">capacity</td>
+          <td class="border">Action</td>
         </tr>
         <!-- Table Rows (Generated dynamically using Vue.js) -->
         <tr v-for="ven in venues" :key="ven">
