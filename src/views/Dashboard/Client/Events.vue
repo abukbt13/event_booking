@@ -40,11 +40,34 @@ onMounted(()=>{
       <td class="border">{{ event.title }} </td>
       <td class="border">{{ event.description }}</td>
       <td class="border">{{ event.capacity }}</td>
-      <td class="border"><button class="btn bg-primary btn-primary">View more</button></td>
+      <td class="border">
+        <router-link to="/venues">Book Venue</router-link>
+      </td>
     </tr>
 
   </table>
 
+  </div>
+
+<!--  modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"> settings</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form @submit.prevent="saveImage">
+            <label for="">
+              Profile picture
+            </label>
+            <input type="file" class="form-control" @change="uploadImage">
+            <button data-bs-dismiss="modal" type="submit" class="btn bg-primary m-2">Update </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
 </template>

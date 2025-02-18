@@ -117,14 +117,7 @@ onMounted(()=>{
         </button>
       </td>
     </tr>
-    <tr>
-      <td>Referees</td>
-      <td>
-        <p>Referees are the closest friends we can contact in case emergencies or while you are not found</p>
-        <p>Click the button below to view and add your referees</p>
-        <router-link to="/user/referees" class="block border fs-2 text-decoration-none">Referees</router-link>
-      </td>
-    </tr>
+
     </tbody>
   </table>
 

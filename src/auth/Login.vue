@@ -22,7 +22,7 @@ const login =async () => {
   const formData = new FormData();
   formData.append('email', email.value)
   formData.append('password', password.value)
-  const res = await axios.post(base_url.value+'auth/login',formData)
+  const res = await axios.post(base_url.value+'auth/login',formData) //api call
   if(res.status=== 200) {
     if (res.data.status === 'success') {
       localStorage.setItem('token', res.data.token);
@@ -55,7 +55,7 @@ const login =async () => {
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
 
         <div class="error text-center bg-danger text-white text-uppercase">{{unique_id}}</div>
-        <h2 class="text-center text-uppercase">Login</h2>
+        <h2 class="text-center text-uppercase">Login Page</h2>
         <p>Don't have an account? <router-link to="/auth/register">Register</router-link></p>
         <div class="error text-center bg-danger text-white text-uppercase p-2" v-if="regerror">{{regerror + ' !'}}</div>
 
