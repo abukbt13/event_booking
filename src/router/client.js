@@ -8,11 +8,11 @@ const routes =[
         component: Home,
     },
     {
-        path: '/user/events',
+        path: '/client/events',
         component: Events,
     },
     {
-        path: '/venues',
+        path: '/client/venues',
         component: Venues,
     }
     ]

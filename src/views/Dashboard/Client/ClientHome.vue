@@ -17,16 +17,19 @@ const  CreateEvent = async () =>{
   formData.append('capacity',capacity.value)
   formData.append('event_date',event_date.value)
   const res = await axios.post(base_url.value + 'event', formData, authHeader)
-  if (res.data.status==='success') {
-    // const modalElement = document.getElementById('create_event');
-    // const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-    // modal.hide();  // Close modal
+  if (res.data.status === 'success') {
+    alert('hey')
     await Swal.fire(
         'Success!',
         'Event created successfully',
         'success'
     );
-  } else {
+    const modalElement = document.getElementById('create_event');
+    const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+    modal.hide();  // Close modal
+
+  }
+  else {
     Swal.fire(
         'Failed!',
         'Something went wrong. Try again later.',
@@ -45,7 +48,7 @@ const  CreateEvent = async () =>{
   <div class="sidebar">
     <ul class="sidebar-links list-unstyled">
 
-        <router-link class="text-decoration-none" to="/user/events">  <li> Events</li></router-link>
+        <router-link class="text-decoration-none" to="/client/events">  <li> Events</li></router-link>
 
 
       <router-link  class="text-decoration-none"  to="/bookings"> <li>Bookings </li></router-link>
@@ -58,15 +61,15 @@ const  CreateEvent = async () =>{
      <div class="d-flex flex-column">
        <div class="border d-flex flex-column p-4">
          <h2>Events</h2>
-         <router-link class="my-2" to="events">Upcoming events</router-link>
-         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_event">Create</button>
+         <router-link class="my-2" to="/client/events">My Events</router-link>
+         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_event">Create Event</button>
        </div>
      </div>
      <div class="d-flex flex-column">
        <div class="border d-flex flex-column p-4">
          <h2>Bookings</h2>
 
-         <router-link to="/bookings" class="my-2">Book space</router-link>
+         <router-link to="/clent/events" class="my-2">Book space</router-link>
          <button class="btn btn-primary">view</button>
        </div>
      </div>
@@ -112,7 +115,7 @@ const  CreateEvent = async () =>{
 
 <style scoped>
 .sidebar-links{
-  background: darkslategray;
+  background: #f8f7fd;
   height: 100vh;
 }
 .sidebar-links li{

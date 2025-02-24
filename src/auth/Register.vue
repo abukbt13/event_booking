@@ -31,6 +31,7 @@ const createAccount =async () => {
     formData.append('first_name', first_name.value)
     formData.append('phone', phone.value)
     formData.append('password', password.value)
+
     const res = await axios.post(base_url.value + 'auth/register', formData)
 
     if (res.data.status === 'success') {
