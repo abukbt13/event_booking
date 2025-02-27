@@ -28,32 +28,40 @@ const deleteEvent = async (id) => {
     cancelButtonText: 'Cancel',
   });
 
-  // Get the modal element and initialize Bootstrap Modal
-  const modalElement = document.getElementById('view'); // Your modal's ID
-  const modal = new bootstrap.Modal(modalElement);
+
 
   if (result.isConfirmed) {
-    try {
+
       // Close the modal before making the delete request
-      modal.hide();
 
       const res = await axios.get(base_url.value + 'event/delete/' + id, authHeader);
 
-      if (res) {
+      if (res.data.status ==='success') {
         // Event deleted successfully, show success alert
-        Swal.fire('Deleted!', 'The event has been deleted.', 'success');
+
+        await Swal.fire('Deleted!', 'The event has been deleted.', 'success');
+
+
       }
-    } catch (error) {
-      // Handle error
-      Swal.fire('Error!', 'There was an issue deleting the event.', 'error');
-    }
-  } else {
+    await getevents()
+  }
+  else {
     // Close the modal if the user cancels the delete action
-    modal.hide();
-    Swal.fire('Cancelled', 'The event was not deleted.', 'info');
+
+    await Swal.fire('Cancelled', 'The event was not deleted.', 'info');
   }
 }
+const UpdateEvent = async (data) =>{
+  const res = await axios.post(base_url.value + 'event/update/' + data.id, data, authHeader);
 
+  if (res.data.status ==='success') {
+    // Event deleted successfully, show success alert
+
+    await Swal.fire('success!', 'The event has been Updated.', 'success');
+
+
+  }
+}
 
 onMounted(()=>{
   getevents()
@@ -84,10 +92,10 @@ onMounted(()=>{
       <td class="border">{{ event.description }}</td>
       <td class="border">{{ event.capacity }}</td>
       <td class="border">
-        <router-link class="btn bg-primary btn-success" to="/user/venues">Book Venue</router-link>
+        <router-link class="btn bg-primary btn-success" to="/client/venues">Book Venue</router-link>
       </td>
       <td class="border">
-        <button @click="populateEvent(event)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#view">View</button>
+        <button @click="populateEvent(event)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#event_view">View</button>
       </td>
     </tr>
 
@@ -96,7 +104,7 @@ onMounted(()=>{
   </div>
 
 <!--  modal to view-->
-  <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="event_view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -106,16 +114,18 @@ onMounted(()=>{
         <div class="p-4">
 <!--          {{event_data}}-->
           <h1>Title</h1>
-          <p class="border p-2">{{ event_data.title }}</p>
+          <input type="text" class="form-control" v-model="event_data.title">
           <h2>Desription</h2>
-          <p class="border p-2">{{ event_data.description }}</p>
+          <textarea  class="form-control" cols="3" rows="3" v-model="event_data.description"></textarea>
           <h3>Capacity</h3>
-          <p class="border p-2">{{ event_data.capacity }}</p>
+          <input type="number" class="form-control" v-model="event_data.capacity">
+
           <h4>Event Date</h4>
-          <p class="border p-2">{{ event_data.event_date }}</p>
-          <div class="d-flex justify-content-around">
-            <button class="btn bg-primary">Book Venue</button>
-            <button class="btn bg-danger" @click="deleteEvent(event_data.id)">Delete Event</button>
+          <input type="date" class="form-control" v-model="event_data.event_date">
+
+          <div class="d-flex justify-content-around mt-2">
+            <button data-bs-dismiss="modal" class="btn bg-primary" @click="UpdateEvent(event_data)">Update</button>
+            <button data-bs-dismiss="modal" class="btn bg-danger" @click="deleteEvent(event_data.id)">Delete </button>
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@ const  CreateEvent = async () =>{
   formData.append('event_date',event_date.value)
   const res = await axios.post(base_url.value + 'event', formData, authHeader)
   if (res.data.status === 'success') {
-    alert('hey')
+
     await Swal.fire(
         'Success!',
         'Event created successfully',
