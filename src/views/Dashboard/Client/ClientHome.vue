@@ -69,7 +69,7 @@ const  CreateEvent = async () =>{
        <div class="border d-flex flex-column p-4">
          <h2>Bookings</h2>
 
-         <router-link to="/clent/events" class="my-2">Book space</router-link>
+         <router-link to="/client/bookings" class="my-2">Book space</router-link>
          <button class="btn btn-primary">view</button>
        </div>
      </div>

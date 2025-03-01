@@ -92,7 +92,9 @@ onMounted(()=>{
       <td class="border">{{ event.description }}</td>
       <td class="border">{{ event.capacity }}</td>
       <td class="border">
-        <router-link class="btn bg-primary btn-success" to="/client/venues">Book Venue</router-link>
+        <router-link class="btn bg-primary btn-success" :to="'/client/event/' + event.capacity">
+          Book Venue
+        </router-link>
       </td>
       <td class="border">
         <button @click="populateEvent(event)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#event_view">View</button>
