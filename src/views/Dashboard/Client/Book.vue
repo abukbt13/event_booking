@@ -10,7 +10,7 @@ const start_time =ref('')
 const end_time =ref('')
 const event_date =ref('')
 const capacity =ref('')
-const venues_data =ref([])
+const venues_data =ref({})
 const event_id = ref('')
 const route = useRoute();
 event_id.value = route.params.id
@@ -46,6 +46,7 @@ const Bookvenue =async (booking_data) => {
 
 onMounted(()=>{
   getVenues()
+  authUser()
 })
 </script>
 
@@ -70,7 +71,7 @@ onMounted(()=>{
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="p-4">
-                    {{venues_data}}
+                    ddd{{venues_data}}
           <form @submit.prevent="Bookvenue(venues_data)">
            <h3>Title</h3>
             <p class="p-1 text-info">
@@ -116,7 +117,7 @@ onMounted(()=>{
 
 
           <div class="d-flex justify-content-around mt-2">
-            <button type="submit" data-bs-dismiss="modal" class="btn bg-primary" @click="Bookvenue(venues_data.id)">Book venue</button>
+            <button type="submit" data-bs-dismiss="modal" class="btn bg-primary">Book venue</button>
             <button data-bs-dismiss="modal" class="btn bg-danger">Close </button>
           </div>
           </form>
