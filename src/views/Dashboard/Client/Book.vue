@@ -4,6 +4,8 @@ import {onMounted, ref} from "vue";
 import {auth} from "@/composables/auth.js";
 import Navbar from "@/components/Navbar.vue";
 import {useRoute} from "vue-router";
+import router from "@/router/index.js";
+import Swal from "sweetalert2";
 const {authUser, authHeader,base_url,storage} = auth()
 const venues =ref([])
 const start_time =ref('')
@@ -24,7 +26,6 @@ const populateVenues = (data) => {
   venues_data.value = data
 }
 const Bookvenue =async (booking_data) => {
-
   const formData = new FormData();
   formData.append('start_time', start_time.value)
   formData.append('end_time', end_time.value)
@@ -39,7 +40,12 @@ const Bookvenue =async (booking_data) => {
   const res = await axios.post(base_url.value + 'event/bookings/'+event_id.value, formData,authHeader) //api call
   if (res.status === 200) {
     if (res.data.status === 'success') {
-      alert('successfully booked')
+      await Swal.fire(
+          'Success!',
+          'Venue  booked successfully proceed to checkout',
+          'success'
+      );
+      await router.push('/checkout/'+res.data.booking.id)
     }
   }
 }
@@ -52,6 +58,7 @@ onMounted(()=>{
 
 <template>
   <Navbar />
+  <h2 class="text-center">Available venues</h2>
 <!--  {{venues}}-->
   <div class="home" >
     <div class="events">
@@ -71,9 +78,9 @@ onMounted(()=>{
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="p-4">
-                    ddd{{venues_data}}
+<!--                    ddd{{venues_data}}-->
           <form @submit.prevent="Bookvenue(venues_data)">
-           <h3>Title</h3>
+           <h3>Venue</h3>
             <p class="p-1 text-info">
               {{ venues_data.venue }}
             </p>
@@ -101,7 +108,7 @@ onMounted(()=>{
             <h3>Contact Email</h3>
             <input type="email" class="form-control" v-model="venues_data.contact_email">
             <h3>Contact Phone</h3>
-            <input type="email" class="form-control" v-model="venues_data.contact_email">
+            <input type="email" class="form-control" v-model="venues_data.contact_phone">
 
          <h1 class="text-center">Enter your Details to book</h1>
 
@@ -117,8 +124,8 @@ onMounted(()=>{
 
 
           <div class="d-flex justify-content-around mt-2">
-            <button type="submit" data-bs-dismiss="modal" class="btn bg-primary">Book venue</button>
-            <button data-bs-dismiss="modal" class="btn bg-danger">Close </button>
+            <button type="submit" data-bs-dismiss="modal" style="background: red;" class="btn">Proceed to Checkout</button>
+            <button data-bs-dismiss="modal" class="btn bg-primary">Close </button>
           </div>
           </form>
         </div>

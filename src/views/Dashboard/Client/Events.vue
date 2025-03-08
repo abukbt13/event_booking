@@ -93,7 +93,7 @@ onMounted(()=>{
       <td class="border">{{ event.capacity }}</td>
       <td class="border">
         <router-link
-            :to="event.booked ? '/client/bookings/' + event.id : '/client/event/' + event.id"
+            :to="event.booked ? '/client/booking/' + event.id : '/client/event/' + event.id"
             :class="event.booked ? 'btn bg-primary btn-warning' : 'btn bg-primary btn-success'"
         >
           {{ event.booked ? 'Booking Detail' : 'Book Venue' }}
