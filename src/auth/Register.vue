@@ -33,7 +33,7 @@ const createAccount =async () => {
     formData.append('password', password.value)
 
     const res = await axios.post(base_url.value + 'auth/register', formData)
-
+    console.log(res.data)
     if (res.data.status === 'success') {
       await router.push('/auth/login')
     }
