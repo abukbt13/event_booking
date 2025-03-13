@@ -76,13 +76,17 @@
   <div class="m-4">
     <table  class="table  border table-hover table-bordered">
       <!-- Table Header -->
-      <tr>
-        <th colspan="6" class="text-uppercase">
-          <div class="d-flex justify-content-between"><div class="">bookings</div>
-            <!--          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#venue">Create</button>-->
-          </div>
-        </th>
-      </tr>
+   <thead>
+   <tr>
+     <th colspan="6" class="text-uppercase">
+       <div class="d-flex justify-content-between"><div class="">bookings</div>
+         <!--          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#venue">Create</button>-->
+       </div>
+     </th>
+   </tr>
+   </thead>
+      <tbody>
+
       <tr>
         <th class="border">Venue</th>
         <th class="border">Date </th>
@@ -97,12 +101,12 @@
         <td class="border">{{ booking.start_time }}</td>
         <td class="border">{{ booking.end_time }}</td>
         <td class="border">
-<!--          <router-link-->
-<!--              :to="event.booked ? '/client/bookings/' + event.id : '/client/event/' + event.id"-->
-<!--              :class="event.booked ? 'btn bg-primary btn-warning' : 'btn bg-primary btn-success'"-->
-<!--          >-->
-<!--            {{ event.booked ? 'Booking Detail' : 'Book Venue' }}-->
-<!--          </router-link>-->
+          <!--          <router-link-->
+          <!--              :to="event.booked ? '/client/bookings/' + event.id : '/client/event/' + event.id"-->
+          <!--              :class="event.booked ? 'btn bg-primary btn-warning' : 'btn bg-primary btn-success'"-->
+          <!--          >-->
+          <!--            {{ event.booked ? 'Booking Detail' : 'Book Venue' }}-->
+          <!--          </router-link>-->
 
 
         </td>
@@ -111,6 +115,7 @@
         </td>
       </tr>
 
+      </tbody>
     </table>
 
   </div>

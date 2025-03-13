@@ -1,12 +1,16 @@
-import Home from "@/views/Dashboard/Home.vue";
 import Events from "@/views/Dashboard/Client/Events.vue";
 import Book from "@/views/Dashboard/Client/Book.vue";
 import MyBookings from "@/views/Dashboard/Client/MyBookings.vue";
 import ThisBooking from "@/views/Dashboard/Client/ThisBooking.vue";
 import Checkout from "@/views/Dashboard/Client/Checkout.vue";
+import ClientHome from "@/views/Dashboard/Client/ClientHome.vue";
 
 const routes =[
 
+    {
+        path: '/client/dashboard',
+        component: ClientHome,
+    },
     {
         path: '/client/events',
         component: Events,

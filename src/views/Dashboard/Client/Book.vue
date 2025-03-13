@@ -17,7 +17,7 @@ const event_id = ref('')
 const route = useRoute();
 event_id.value = route.params.id
 const  getVenues= async () => {
-  const res = await axios.get(base_url.value + 'venue', authHeader)
+  const res = await axios.get(base_url.value + 'show/venues', authHeader)
   if(res){
     venues.value = res.data.venues
   }

@@ -74,37 +74,41 @@ onMounted(()=>{
   <div class="m-4">
       <table  class="table  border table-hover table-bordered">
     <!-- Table Header -->
-    <tr>
-      <th colspan="6" class="text-uppercase">
-        <div class="d-flex justify-content-between"><div class="">events</div>
-<!--          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#venue">Create</button>-->
-        </div>
-      </th>
-    </tr>
-    <tr>
-      <th class="border">Title</th>
-      <th class="border">Description </th>
-      <th class="border">capacity</th>
-    </tr>
-    <!-- Table Rows (Generated dynamically using Vue.js) -->
-    <tr v-for="event in events" :key="ven">
-      <td class="border">{{ event.title }} </td>
-      <td class="border">{{ event.description }}</td>
-      <td class="border">{{ event.capacity }}</td>
-      <td class="border">
-        <router-link
-            :to="event.booked ? '/client/booking/' + event.id : '/client/event/' + event.id"
-            :class="event.booked ? 'btn bg-primary btn-warning' : 'btn bg-primary btn-success'"
-        >
-          {{ event.booked ? 'Booking Detail' : 'Book Venue' }}
-        </router-link>
+   <thead>
+   <tr>
+     <th colspan="6" class="text-uppercase">
+       <div class="d-flex justify-content-between"><div class="">events</div>
+         <!--          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#venue">Create</button>-->
+       </div>
+     </th>
+   </tr>
+   </thead>
+  <tbody>
+  <tr>
+    <td class="border">Title</td>
+    <td class="border">Description </td>
+    <td class="border">capacity</td>
+  </tr>
+  <!-- Table Rows (Generated dynamically using Vue.js) -->
+  <tr v-for="event in events" :key="ven">
+    <td class="border">{{ event.title }} </td>
+    <td class="border">{{ event.description }}</td>
+    <td class="border">{{ event.capacity }}</td>
+    <td class="border">
+      <router-link
+          :to="event.booked ? '/client/booking/' + event.id : '/client/event/' + event.id"
+          :class="event.booked ? 'btn bg-primary btn-warning' : 'btn bg-primary btn-success'"
+      >
+        {{ event.booked ? 'Booking Detail' : 'Book Venue' }}
+      </router-link>
 
 
-      </td>
-      <td class="border">
-        <button @click="populateEvent(event)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#event_view">View</button>
-      </td>
-    </tr>
+    </td>
+    <td class="border">
+      <button @click="populateEvent(event)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#event_view">View</button>
+    </td>
+  </tr>
+  </tbody>
 
   </table>
 

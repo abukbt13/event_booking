@@ -24,13 +24,18 @@ const login =async () => {
   formData.append('password', password.value)
   const res = await axios.post(base_url.value+'auth/login',formData) //api call
   if(res.status=== 200) {
-    if (res.data.status === 'success') {
+    if (res.data.user.role === 'client') {
       localStorage.setItem('token', res.data.token);
 
-        await router.push('/dashboard')
+        await router.push('/client/dashboard')
 
     }
-    else if(res.data.status === 'failed') {
+    else if(res.data.user.role === 'admin') {
+      localStorage.setItem('token', res.data.token);
+
+      await router.push('/admin/dashboard')
+    }
+    else if(res.data.user.role === 'admin') {
       logging.value =true
       regerror.value = res.data.message;
     }
