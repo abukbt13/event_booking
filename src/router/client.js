@@ -6,12 +6,9 @@ import ThisBooking from "@/views/Dashboard/Client/ThisBooking.vue";
 import Checkout from "@/views/Dashboard/Client/Checkout.vue";
 
 const routes =[
+
     {
-        path: '/dashboard',
-        component: Home,
-    },
-    {
-            path: '/client/events',
+        path: '/client/events',
         component: Events,
     },
     {
