@@ -35,14 +35,14 @@ onMounted(()=>{
             <router-link class="nav-link active  text-primary text-uppercase" to="/about">About</router-link>
           </li>
           <div class="d-flex column" v-if="currentUser.first_name">
-            <div  class="d-flex column" v-if="currentUser.role === 1 ">
+            <div  class="d-flex column" v-if="currentUser.role === 'admin' ">
               <li class="nav-item text-uppercase">
-                <router-link class="nav-link  text-primary" to="/dashboard">Dashboard</router-link>
+                <router-link class="nav-link  text-primary" to="/admin/dashboard">Dashboard</router-link>
               </li>
             </div>
             <div  class="" v-else>
               <li class="nav-item text-uppercase">
-                <router-link class="nav-link text-primary" to="/dashboard">Dashboard</router-link>
+                <router-link class="nav-link text-primary" to="/client/dashboard">Dashboard</router-link>
               </li>
             </div>
             <router-link to="/user/profile" class="nav-item text-uppercase">

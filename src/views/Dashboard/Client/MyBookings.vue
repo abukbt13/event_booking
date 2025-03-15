@@ -111,7 +111,7 @@
 
         </td>
         <td class="border">
-          <button @click="populateEvent(event)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#event_view">View</button>
+          <button @click="populateEvent(booking)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#event_view">View</button>
         </td>
       </tr>
 
