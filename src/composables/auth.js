@@ -2,7 +2,7 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 const currentUser = ref([])
 export function auth(){
-    const authHeader = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } };
+const authHeader = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } };
 
     const base_url = ref(import.meta.env.VITE_APP_API_URL)
     const storage = ref(import.meta.env.VITE_APP_STORAGE_URL)
