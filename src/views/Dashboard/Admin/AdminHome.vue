@@ -17,11 +17,18 @@ const amenities = ref('')
 const price_per_hour = ref('')
 const contact_email = ref('')
 const contact_phone = ref('')
+const picture = ref('')
+const venues_data = ref([])
 
 
 // Sidebar state
 const isSidebarOpen = ref(false);
-const  CreateEvent = async () =>{
+
+function pictureUpload(e){
+  picture.value=e.target.files[0];
+}
+
+const  CreateVenue = async () =>{
   const formData = new FormData()
   formData.append('venue',venue.value)
   formData.append('location',venue_location.value)
@@ -31,8 +38,10 @@ const  CreateEvent = async () =>{
   formData.append('price_per_hour',price_per_hour.value)
   formData.append('contact_email',contact_email.value)
   formData.append('contact_phone',contact_phone.value)
+  formData.append('picture',picture.value)
   const res = await axios.post(base_url.value + 'admin/venue', formData, authHeader)
   if (res.data.status==='success') {
+    // console.log(res)
     await getVenues()
     const modalElement = document.getElementById('venue');
     const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
@@ -43,7 +52,7 @@ const  CreateEvent = async () =>{
         'success'
     );
   } else {
-    Swal.fire(
+    await Swal.fire(
         'Failed!',
         'Something went wrong. Try again later.',
         'error' // Changed to 'error' for better context
@@ -61,6 +70,9 @@ const  getVenues= async () => {
 
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
+};
+const populateVenue = (data) => {
+  venues_data.value = data;
 };
 onMounted(()=>{
   getVenues()
@@ -102,17 +114,24 @@ onMounted(()=>{
         <tbody>
 
         <tr>
+
+          <td class="border">Picture</td>
           <td class="border">venue</td>
           <td class="border">location </td>
           <td class="border">capacity</td>
           <td class="border">Action</td>
         </tr>
         <!-- Table Rows (Generated dynamically using Vue.js) -->
-        <tr v-for="ven in venues" :key="ven">
+        <tr v-for="ven in venues" :key="ven" class="text-center align-middle">
+          <td class="border">
+            <img :src="storage+ven.picture" alt="No picture" height="200" width="200" id="profile-img">
+
+          </td>
           <td class="border">{{ ven.venue }} </td>
           <td class="border">{{ ven.location }}</td>
           <td class="border">{{ ven.capacity }}</td>
-          <td class="border"><button class="btn bg-primary btn-primary">View more</button></td>
+
+          <td class="border"><button class="btn bg-primary btn-primary" @click="populateVenue(ven)" data-bs-toggle="modal" data-bs-target="#exampleModal">View more</button></td>
         </tr>
         </tbody>
 
@@ -121,36 +140,6 @@ onMounted(()=>{
   </div>
 
   <!-- Create Event Modal -->
-  <div class="modal fade" id="create_event" tabindex="-1" aria-labelledby="create_eventLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="create_eventLabel">Create event</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form @submit.prevent="CreateEvent">
-            <label for="title">Title</label>
-            <input type="text" v-model="title" class="form-control" placeholder="Enter title" />
-
-            <label for="description" class="mt-2">Description</label>
-            <input type="text" v-model="description" class="form-control" placeholder="Enter description" />
-
-            <label for="document" class="mt-2">Event Date</label>
-            <input type="date" v-model="event_date" class="form-control" />
-
-            <label for="document" class="mt-2">Capacity</label>
-            <input type="number" v-model="capacity" class="form-control" />
-
-            <div class="d-flex justify-content-around mt-3">
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="modal fade" id="venue" tabindex="-1" aria-labelledby="venueLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -161,7 +150,7 @@ onMounted(()=>{
         </div>
         <div class="modal-body">
 
-          <form @submit.prevent="CreateEvent">
+          <form @submit.prevent="CreateVenue">
             <label for="title">Venue Name</label>
             <input type="text" v-model="venue" class="form-control" placeholder="Enter venue">
 
@@ -184,14 +173,17 @@ onMounted(()=>{
             <input type="number"  v-model="price_per_hour" class="form-control">
 
             <label for="document" class="mt-2">contact_email</label>
-            <input type="text"  v-model="contact_email" class="form-control">
+            <input type="email"  v-model="contact_email" class="form-control">
 
             <label for="document" class="mt-2">Contact_Phone</label>
-            <input type="contact_phone"  v-model="contact_phone" class="form-control">
+            <input type="text"  v-model="contact_phone" class="form-control">
+
+            <label for="document" class="mt-2">Picture Of Venue</label>
+            <input type="file" @change="pictureUpload" />
+
             <div class="d-flex justify-content-around mt-3">
               <button type="submit" class="btn btn-primary">Submit</button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
             </div>
           </form>
         </div>
@@ -200,6 +192,28 @@ onMounted(()=>{
     </div>
   </div>
 
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h2 class="text-center">Venue Details</h2>
+          {{venues_data}}
+          <div class="border p-2">
+            <h2>Venue Name</h2>
+<!--            <p>{{}}</p>-->
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </template>
 <style scoped>
 /* Sidebar styling */
