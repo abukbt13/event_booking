@@ -70,6 +70,9 @@ li:hover{
   cursor: progress;
 }
 @media screen and (max-width:600px) and (min-height: 250px){
+  .navbar{
+    width: 100vw;
+  }
   .column{
     flex-direction: column;
   }

@@ -42,7 +42,7 @@ const  CreateVenue = async () =>{
   formData.append('contact_phone',contact_phone.value)
   formData.append('picture',picture.value)
   if(edit.value ===true){
-    alert('editing')
+    // alert('editing')
     const res = await axios.post(base_url.value + 'admin/venue/'+edit_id.value, formData, authHeader)
     if (res.data.status==='success') {
       // console.log(res)
@@ -127,7 +127,7 @@ onMounted(()=>{
   <!-- Sidebar Toggle Button -->
   <i
       :class="['bi', isSidebarOpen ? 'bi-x-lg' : 'bi-list-nested', 'open']"
-      style="font-size: 30px; cursor: pointer"
+      style="font-size: 30px; cursor: pointer; width: 100vw;"
       @click="toggleSidebar"
   ></i>
   <div class="d-flex">
@@ -323,7 +323,7 @@ onMounted(()=>{
   }
   .sidebar {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     height: 80vh;
     background: #f8f7fd;
     left: -100%; /* Hide sidebar initially */
@@ -334,7 +334,7 @@ onMounted(()=>{
   }
 
   .contents {
-    width: 100%;
+    width: 100vw;
     height: 50vh;
   }
 }
