@@ -20,7 +20,7 @@ onMounted(()=>{
 
 <template>
   <Navbar />
-{{bookings}}
+<!--{{bookings}}-->
   <div class="p-4">
     <table  class="table  border table-hover table-bordered">
       <!-- Table Header -->

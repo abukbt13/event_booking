@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import {onMounted, ref} from "vue";
 import {auth} from "@/composables/auth.js";
 import Navbar from "@/components/Navbar.vue";
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 const {authUser, authHeader,base_url,storage} = auth()
 const venues = ref([])
 const bookings = ref([])
@@ -47,9 +49,9 @@ const  CreateVenue = async () =>{
     if (res.data.status==='success') {
       // console.log(res)
       await getVenues()
-      const modalElement = document.getElementById('venue');
-      const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-      modal.hide();  // Close modal
+      const modalElement = document.getElementById('venue'); // Ensure the ID matches your modal's HTML ID
+      const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+      modalInstance.hide(); // Close the modal programmatically
       await Swal.fire(
           'Success!',
           'venue Updated successfully',
@@ -67,12 +69,14 @@ const  CreateVenue = async () =>{
   else {
     // alert('creatting')
     const res = await axios.post(base_url.value + 'admin/venue', formData, authHeader)
-    if (res.data.status==='success') {
+    if (res.data.status === 'success') {
+      alert('')
       // console.log(res)
+
+      const modalElement = document.getElementById('venue'); // Your modal's ID
+      const modal = new bootstrap.Modal(modalElement);
+      modal.hide() // Close modal
       await getVenues()
-      const modalElement = document.getElementById('venue');
-      const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-      modal.hide();  // Close modal
       await Swal.fire(
           'Success!',
           'venue created successfully',
@@ -116,6 +120,19 @@ const EditVenue = (data) => {
       edit.value = true
       edit_id.value = data.id
 };
+function DisableEdit(){
+  venue.value=''
+  venue_location.value=''
+  capacity.value=''
+  description.value=''
+  amenities.value=''
+  price_per_hour.value=''
+  contact_email.value=''
+  contact_phone.value=''
+  picture.value=''
+  edit_id.value = ''
+  edit.value = false
+}
 onMounted(()=>{
   getVenues()
 })
@@ -148,7 +165,7 @@ onMounted(()=>{
         <tr>
           <th colspan="6" class="text-uppercase">
             <div class="d-flex justify-content-between"><div class="">Venues</div>
-              <button class="btn btn-primary me-4" data-bs-toggle="modal" @click="edit = false" data-bs-target="#venue">Create</button>
+              <button class="btn btn-primary me-4" data-bs-toggle="modal" @click="DisableEdit" data-bs-target="#venue">Create</button>
             </div>
           </th>
         </tr>

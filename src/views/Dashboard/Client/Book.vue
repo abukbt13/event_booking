@@ -62,7 +62,12 @@ onMounted(()=>{
 <!--  {{venues}}-->
   <div class="home" >
     <div class="events">
-      <div class="border  m-3 p-2" v-for="venue in venues" :key="venue">
+      <div
+          class="border m-3 p-2"
+          v-for="venue in venues"
+          :key="venue.id"
+          :style="{ backgroundImage: `url(${storage + venue.picture})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '200px' }"
+      >
         <h3 class="text-center">{{venue.venue}}</h3>
         <p class="text-center">Location :{{venue.location}}</p>
         <div class="text-center" ><button @click="populateVenues(venue)" data-bs-toggle="modal" data-bs-target="#venue_view" class="btn btn-primary">More details</button></div>

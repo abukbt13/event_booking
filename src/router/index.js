@@ -4,6 +4,7 @@ import clientsroutes from './client.js'
 import adminsroutes from './admin.js'
 import authroutes from './auth.js'
 import clientroutes from './client.js'
+import AboutUs from "@/views/AboutUs.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +17,10 @@ const router = createRouter({
     {
       path: '/',
       component: HomeView,
+    },
+    {
+      path: '/about_us',
+      component: AboutUs,
     }
   ],
 })
