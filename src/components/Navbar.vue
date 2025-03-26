@@ -32,7 +32,7 @@ onMounted(()=>{
             <router-link class="nav-link active  text-primary text-uppercase" to="/">Home</router-link>
           </li>
           <li class="nav-item  text-primary">
-            <router-link class="nav-link active  text-primary text-uppercase" to="/about">About</router-link>
+            <router-link class="nav-link active  text-primary text-uppercase" to="/about_us">About</router-link>
           </li>
           <div class="d-flex column" v-if="currentUser.first_name">
             <div  class="d-flex column" v-if="currentUser.role === 'admin' ">

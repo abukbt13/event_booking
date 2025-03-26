@@ -62,7 +62,7 @@ const toggleSidebar = () => {
         <router-link class="text-decoration-none" to="/client/events">
           <li>Events</li>
         </router-link>
-        <router-link class="text-decoration-none" to="/bookings">
+        <router-link class="text-decoration-none" to="/client/bookings">
           <li>Bookings</li>
         </router-link>
       </ul>

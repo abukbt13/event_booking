@@ -1,6 +1,7 @@
 <script setup>
 
 import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import Navbar from "@/components/Navbar.vue";
 
       <router-link to="/about_us" style="background:orange;" class="my-2 text-decoration-none text-white p-2 text-uppercase">Get In Tough</router-link>
     </div>
+  <Footer />
 </template>
 
 <style >

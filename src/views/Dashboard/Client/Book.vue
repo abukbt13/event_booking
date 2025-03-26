@@ -68,9 +68,9 @@ onMounted(()=>{
           :key="venue.id"
           :style="{ backgroundImage: `url(${storage + venue.picture})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '200px' }"
       >
-        <h3 class="text-center">{{venue.venue}}</h3>
-        <p class="text-center">Location :{{venue.location}}</p>
-        <div class="text-center" ><button @click="populateVenues(venue)" data-bs-toggle="modal" data-bs-target="#venue_view" class="btn btn-primary">More details</button></div>
+        <h3 class="text-center"><span class="bg-light">{{venue.venue}}</span></h3>
+        <p class="text-center location"><span class="bg-light">Location :{{venue.location}}</span></p>
+        <div class="text-center" ><button @click="populateVenues(venue)" data-bs-toggle="modal" data-bs-target="#venue_view" class="btn btn-sm btn-primary">More details</button></div>
       </div>
     </div>
 
@@ -152,6 +152,7 @@ onMounted(()=>{
   width: 100%;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
 @media screen and (min-width: 400px) and (max-height: 600px) {
   .events{
     display: grid;
