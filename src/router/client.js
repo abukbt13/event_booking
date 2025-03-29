@@ -1,9 +1,10 @@
 import Events from "@/views/Dashboard/Client/Events.vue";
-import Book from "@/views/Dashboard/Client/Book.vue";
+import ShowVenues from "@/views/Dashboard/Client/ShowVenues.vue";
 import MyBookings from "@/views/Dashboard/Client/MyBookings.vue";
 import ThisBooking from "@/views/Dashboard/Client/ThisBooking.vue";
 import Checkout from "@/views/Dashboard/Client/Checkout.vue";
 import ClientHome from "@/views/Dashboard/Client/ClientHome.vue";
+import Boooking from "@/views/Dashboard/Client/Boooking.vue";
 
 const routes =[
 
@@ -16,8 +17,12 @@ const routes =[
         component: Events,
     },
     {
-        path: '/client/event/:id',
-        component: Book,
+        path: '/client/event/:id?',
+        component: ShowVenues,
+    },
+    {
+        path: '/booking/:id/:venue_id',
+        component: Boooking,
     },
     {
         path: '/checkout/:id',

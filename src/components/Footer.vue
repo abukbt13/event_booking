@@ -6,7 +6,8 @@
   <div style="background-color: #f8f6f6; max-width: 100%;min-width: 100%;" class="row py-4 footer px-4 d-flex justify-content-center">
     <div class="col  col-12  col-sm-2 mt-2 mx-2">
       <h5 class="text-uppercase text-primary">Eventsphere</h5>
-      <p style="color: black;" class="">Eagles your financial loving partner in all your savings and investments </p>
+      <p style="color: black;" class="">
+        Evensphere your ultime event and booking partner</p>
 
     </div>
     <div class="col col-12 col-sm-3 mt-2 mx-2">

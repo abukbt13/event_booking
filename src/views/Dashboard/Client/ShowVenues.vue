@@ -25,30 +25,6 @@ const  getVenues= async () => {
 const populateVenues = (data) => {
   venues_data.value = data
 }
-const Bookvenue =async (booking_data) => {
-  const formData = new FormData();
-  formData.append('start_time', start_time.value)
-  formData.append('end_time', end_time.value)
-  formData.append('event_date', event_date.value)
-  formData.append('capacity', capacity.value)
-  formData.append('venue', booking_data.venue)
-  formData.append('venue_id', booking_data.id)
-  formData.append('price_per_hour', booking_data.price_per_hour)
-  formData.append('total_price', 70)
-  console.log(formData)
-  console.log(booking_data.id)
-  const res = await axios.post(base_url.value + 'event/bookings/'+event_id.value, formData,authHeader) //api call
-  if (res.status === 200) {
-    if (res.data.status === 'success') {
-      await Swal.fire(
-          'Success!',
-          'Venue  booked successfully proceed to checkout',
-          'success'
-      );
-      await router.push('/checkout/'+res.data.booking.id)
-    }
-  }
-}
 
 onMounted(()=>{
   getVenues()
@@ -70,12 +46,12 @@ onMounted(()=>{
       >
         <h3 class="text-center"><span class="bg-light">{{venue.venue}}</span></h3>
         <p class="text-center location"><span class="bg-light">Location :{{venue.location}}</span></p>
-        <div class="text-center" ><button @click="populateVenues(venue)" data-bs-toggle="modal" data-bs-target="#venue_view" class="btn btn-sm btn-primary">More details</button></div>
+        <div class="text-center" ><button @click="populateVenues(venue)" data-bs-toggle="modal" data-bs-target="#venue_view" class="btn bt-sm btn-primary">More details</button></div>
       </div>
     </div>
 
   </div>
-  <div class="modal fade" id="venue_view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="venue_view" tabindex="-1" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -84,7 +60,6 @@ onMounted(()=>{
         </div>
         <div class="p-4">
 <!--                    ddd{{venues_data}}-->
-          <form @submit.prevent="Bookvenue(venues_data)">
            <h3>Venue</h3>
             <p class="p-1 text-info">
               {{ venues_data.venue }}
@@ -106,33 +81,41 @@ onMounted(()=>{
               {{ venues_data.amenities }}
             </p>
             <h3>Price per hour</h3>
-            <p class=" p-1 text-info">
-             Ksh. {{ venues_data.price_per_hour }}
-            </p>
+          <p class=" p-1 text-info">
+            Ksh. {{ venues_data.price_per_hour }}
+          </p>
 
-            <h3>Contact Email</h3>
-            <input type="email" class="form-control" v-model="venues_data.contact_email">
-            <h3>Contact Phone</h3>
-            <input type="email" class="form-control" v-model="venues_data.contact_phone">
+          <h3>Contact Email</h3>
+          <p>
+            {{ venues_data.contact_email }}
+          </p>
+          <h3>Contact Phone</h3>
+          <p>
+            {{ venues_data.contact_phone }}
+          </p>
 
-         <h1 class="text-center">Enter your Details to book</h1>
-
-          <h3>Event date</h3>
-          <input type="date" class="form-control" v-model="event_date">
-
-          <h3>Start Time</h3>
-          <input type="time" class="form-control" v-model="start_time">
-          <h3>End Time</h3>
-          <input type="time" class="form-control" v-model="end_time">
-           <h3>Number Of People</h3>
-          <input type="number" class="form-control" v-model="capacity">
 
 
           <div class="d-flex justify-content-around mt-2">
-            <button type="submit" data-bs-dismiss="modal" style="background: red;" class="btn">Proceed to Checkout</button>
-            <button data-bs-dismiss="modal" class="btn bg-primary">Close </button>
+            <a
+                v-if="event_id"
+                :href="'/booking/' + event_id +'/' +venues_data.id"
+                style="background: red;"
+                class="btn float-end"
+            >
+              Proceed to Book
+            </a>
+            <a
+                href="/client/events"
+                v-else
+                class="btn btn-danger float-end"
+
+            >
+              Select Event
+            </a>
           </div>
-          </form>
+
+
         </div>
       </div>
     </div>
