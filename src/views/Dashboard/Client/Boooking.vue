@@ -104,7 +104,7 @@ onMounted(()=>{
 
 <template>
   <Navbar />
-  {{venues}}
+<!--  {{venues}}-->
   <div class="d-flex align-items-center justify-content-center">
   <div class="border p-2">
     <h4 class="text-center border-bottom">Venue Details</h4>
