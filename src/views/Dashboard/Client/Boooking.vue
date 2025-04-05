@@ -170,7 +170,7 @@ onMounted(()=>{
              <input type="number" class="form-control"  v-model="capacity">
            </div>
            <div class="m-4">
-             <button type="submit" class="btn btn-danger float-end">Checkout</button>
+             <button type="submit" class="btn btn-danger float-end m-3">Checkout</button>
            </div>
          </form>
 

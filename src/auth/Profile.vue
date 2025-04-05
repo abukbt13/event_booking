@@ -77,49 +77,51 @@ onMounted(()=>{
 
 <Navbar />
 
-  <table class="table table-bordered">
-    <thead>
-    <tr>
-      <td colspan="2" class="td">
-        <div  class="d-flex justify-content-between align-items-center">
-          <h2>Personal Details</h2>
-          <span @click="LogOut"  class="float-end text-uppercase  p-2 text-white bg-danger">logout</span>
-        </div>
-      </td>
-    </tr>
-    </thead>
-    <tbody>
+  <div class="container">
+    <table class="table mt-2 table-bordered">
+      <thead>
+      <tr>
+        <td colspan="2" class="td">
+          <div  class="d-flex justify-content-between align-items-center">
+            <h2>Personal Details</h2>
+            <span @click="LogOut"  class="float-end text-uppercase  p-2 text-white bg-danger">logout</span>
+          </div>
+        </td>
+      </tr>
+      </thead>
+      <tbody>
 
-    <tr>
-      <td>Full names</td>
-      <td>{{  currentUser.first_name }} {{  currentUser.last_name }} </td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td>{{  currentUser.email }}</td>
-    </tr>
-    <tr>
-      <td>Phone number</td>
-      <td>{{  currentUser.phone }}</td>
-    </tr>
-    <tr>
-      <td>Profile Picture</td>
-      <td>
+      <tr>
+        <td>Full names</td>
+        <td>{{  currentUser.first_name }} {{  currentUser.last_name }} </td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{  currentUser.email }}</td>
+      </tr>
+      <tr>
+        <td>Phone number</td>
+        <td>{{  currentUser.phone }}</td>
+      </tr>
+      <!--    <tr>-->
+      <!--      <td>Profile Picture</td>-->
+      <!--      <td>-->
 
-        <img :src="storage+'Profiles/'+currentUser.profile" alt="Upload picture" height="200" width="200" id="profile-img">
+      <!--        <img :src="storage+'Profiles/'+currentUser.profile" alt="Upload picture" height="200" width="200" id="profile-img">-->
 
-      </td>
-    </tr>
-    <tr class="p-2 m-2 text-center">
-      <td colspan="2" class="">
-        <button  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn mx-4  bg-success text-white">
-          Update profile
-        </button>
-      </td>
-    </tr>
+      <!--      </td>-->
+      <!--    </tr>-->
+      <!--    <tr class="p-2 m-2 text-center">-->
+      <!--      <td colspan="2" class="">-->
+      <!--        <button  data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn mx-4  bg-success text-white">-->
+      <!--          Update profile-->
+      <!--        </button>-->
+      <!--      </td>-->
+      <!--    </tr>-->
 
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

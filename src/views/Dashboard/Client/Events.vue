@@ -77,8 +77,8 @@ onMounted(()=>{
    <thead>
    <tr>
      <th colspan="6" class="text-uppercase">
-       <div class="d-flex justify-content-between"><div class="">events</div>
-         <!--          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#venue">Create</button>-->
+       <div class="">
+         <div class="text-center">My events</div>
        </div>
      </th>
    </tr>
@@ -90,7 +90,7 @@ onMounted(()=>{
     <td class="border">capacity</td>
   </tr>
   <!-- Table Rows (Generated dynamically using Vue.js) -->
-  <tr v-for="event in events" :key="ven">
+  <tr v-if="events.length >0" v-for="event in events" :key="ven">
     <td class="border">{{ event.title }} </td>
     <td class="border">{{ event.description }}</td>
     <td class="border">{{ event.capacity }}</td>
@@ -107,6 +107,9 @@ onMounted(()=>{
     <td class="border">
       <button @click="populateEvent(event)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#event_view">View</button>
     </td>
+  </tr>
+  <tr v-else>
+    <td colspan="4"><h2 class="text-center">No event created</h2></td>
   </tr>
   </tbody>
 

@@ -6,6 +6,7 @@ import {auth} from "@/composables/auth.js";
 import {onMounted, ref} from "vue";
 import {useRoute} from "vue-router";
 import Navbar from "@/components/Navbar.vue";
+import Swal from "sweetalert2";
 const {authUser, authHeader,base_url,storage} = auth()
 const event_id = ref('')
 const book = ref([])
@@ -19,6 +20,36 @@ const  getBooking= async () => {
     book.value = res.data.booking
   }
 }
+const confirmCancelBooking = async (bookingId) => {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: 'You are about to cancel this booking. This action cannot be undone!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Yes, cancel it!',
+    cancelButtonText: 'No, keep it'
+  });
+
+  if (result.isConfirmed) {
+    CancelBooking(bookingId);
+  }
+};
+const CancelBooking = async (bookingId) => {
+  try {
+    const res = await axios.delete(`${base_url.value}booking/${bookingId}`, authHeader);
+    if (res.data.status === 'success') {
+      await Swal.fire('Cancelled!', 'Your booking has been cancelled.', 'success');
+      // Optionally refresh bookings list here
+    } else {
+      Swal.fire('Error!', 'Could not cancel booking.', 'error');
+    }
+  } catch (error) {
+    Swal.fire('Error!', 'Something went wrong.', 'error');
+  }
+};
+
 
 onMounted(()=>{
   getBooking()
@@ -61,9 +92,12 @@ onMounted(()=>{
           <p class="text-start">{{ book.total_price }}</p>
         </div>
         <div class="border p-2 m-2">
-         <router-link :to="'/checkout/'+book.id" v-if="book.status ==='pending'" class="btn btn-success">Proceed to Checkout</router-link>
-         <button v-if="book.status ==='booked'" class="btn btn-success ">Booked</button>
+          <button class="btn btn-success">Pending</button>
+         <button v-if="book.status ==='active'" class="btn btn-success ">Active</button>
          <button v-if="book.status ==='completed'" class="btn btn-success">Completed</button>
+        </div>
+        <div class="border">
+          <button @click="confirmCancelBooking(book.id)" class="btn btn-danger text-white">Cancel This Booking</button>
         </div>
 
       </div>

@@ -4,7 +4,8 @@ import Swal from "sweetalert2";
 import { ref } from "vue";
 import { auth } from "@/composables/auth.js";
 import Navbar from "@/components/Navbar.vue";
-
+import {Modal} from "bootstrap";
+import * as bootstrapModal from "@popperjs/core";
 const { authUser, authHeader, base_url } = auth();
 
 // Form inputs
@@ -12,6 +13,8 @@ const title = ref("");
 const description = ref("");
 const capacity = ref("");
 const event_date = ref("");
+const message = ref("");
+const error = ref("");
 
 // Sidebar state
 const isSidebarOpen = ref(false);
@@ -23,23 +26,26 @@ const CreateEvent = async () => {
   formData.append("capacity", capacity.value);
   formData.append("event_date", event_date.value);
 
-  try {
-    const res = await axios.post(base_url.value + "event", formData, authHeader);
-    if (res.data.status === "success") {
-      await Swal.fire("Success!", "Event created successfully", "success");
+  const res = await axios.post(base_url.value + "event", formData, authHeader);
 
-      // Close the modal
-      const modalElement = document.getElementById("create_event");
-      const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-      modal.hide();
-    } else {
-      Swal.fire("Failed!", "Something went wrong. Try again later.", "error");
-    }
-  } catch (error) {
-    Swal.fire("Error!", "Failed to create event.", "error");
+  if (res.data.status === "success") {
+
+    await Swal.fire("Success!", "Event created successfully", "success");
+
+    // Reset form fields
+    title.value = "";
+    description.value = "";
+    capacity.value = "";
+    event_date.value = "";
+    message.value=res.data.status
+
+  } else {
+    // message.value=res.data.status
+    error.value=res.data.message
+
+    await Swal.fire("Failed!", "Something went wrong. Try again later.", "error");
   }
-};
-
+}
 // Toggle sidebar visibility
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
@@ -69,23 +75,28 @@ const toggleSidebar = () => {
     </div>
 
     <!-- Content -->
-    <div class="contents d-flex flex-column justify-content-around">
-      <div class="d-flex flex-row justify-content-around">
-        <div class="d-flex flex-column">
-          <div class="border d-flex flex-column p-4">
-            <h2>Events</h2>
-            <router-link class="my-2" to="/client/events">My Events</router-link>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_event">Create Event</button>
+    <div class="contents">
+      <h3 v-if="message" class="bg-danger text-center text-white text-uppercase">Event created successfully</h3>
+      <h3 v-if="error" class="bg-danger p-2 text-center  text-white text-uppercase">{{error}} <button data-bs-toggle="modal" data-bs-target="#create_event" class="btn btn-sm btn-primary">Try again</button></h3>
+      <div class="contents d-flex flex-column justify-content-around">
+        <div class="d-flex flex-row justify-content-around">
+          <div class="d-flex flex-column">
+            <div class="border d-flex flex-column p-4">
+              <h2>Events</h2>
+              <router-link class="my-2" to="/client/events">My Events</router-link>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_event">Create Event</button>
+            </div>
           </div>
-        </div>
-        <div class="d-flex flex-column">
-          <div class="border d-flex flex-column p-4">
-            <h2>Bookings</h2>
-            <router-link to="/client/bookings" class="my-2">Book space</router-link>
-            <button class="btn btn-primary">View</button>
+          <div class="d-flex flex-column">
+            <div class="border d-flex flex-column p-4">
+              <h2>Bookings</h2>
+              <router-link to="/client/bookings" class="my-2">Book space</router-link>
+              <button class="btn btn-primary">View</button>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -100,19 +111,31 @@ const toggleSidebar = () => {
         <div class="modal-body">
           <form @submit.prevent="CreateEvent">
             <label for="title">Title</label>
-            <input type="text" v-model="title" class="form-control" placeholder="Enter title" />
+            <select v-model="title" class="form-control" required>
+              <option value="" disabled>---Select Event Type---</option>
+              <option value="Wedding">Wedding</option>
+              <option value="Fundraising">Fundraising</option>
+              <option value="Cultural Event">Cultural Event</option>
+              <option value="Political Rallies">Political Rallies</option>
+              <option value="Team Building">Team Building</option>
+              <option value="Birthday Party">Birthday Party</option>
+              <option value="Graduation ceremony">Graduation ceremony</option>
+            </select>
+<!--            <input type="text" v-model="title" class="form-control" placeholder="Enter title" />-->
 
             <label for="description" class="mt-2">Description</label>
-            <input type="text" v-model="description" class="form-control" placeholder="Enter description" />
+            <textarea v-model="description" required class="form-control" rows="5">
+
+            </textarea>
 
             <label for="document" class="mt-2">Event Date</label>
-            <input type="date" v-model="event_date" class="form-control" />
+            <input type="date" v-model="event_date" required class="form-control" />
 
             <label for="document" class="mt-2">Capacity</label>
-            <input type="number" v-model="capacity" class="form-control" />
+            <input type="number" v-model="capacity" required min="2" class="form-control" />
 
             <div class="d-flex justify-content-around mt-3">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Submit</button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
           </form>
