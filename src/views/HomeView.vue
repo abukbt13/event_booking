@@ -10,7 +10,7 @@ import Footer from "@/components/Footer.vue";
       <h1 class="text-center">Eventsphere</h1>
       <h3 class="my-2 p-x-2 text-center ">Quick and convenient place for you <br> to create and do your boookings </h3>
 
-      <router-link to="/about_us" style="background:orange;" class="my-2 text-decoration-none text-white p-2 text-uppercase">Get In Tough</router-link>
+      <router-link to="/about_us"  class="my-2 btn bg-primary text-decoration-none text-white p-2 text-uppercase">Get In Tough</router-link>
     </div>
   <div class="">
     <h2 class="text-center text-uppercase">
