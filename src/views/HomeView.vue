@@ -12,14 +12,26 @@ import Footer from "@/components/Footer.vue";
 
       <router-link to="/about_us" style="background:orange;" class="my-2 text-decoration-none text-white p-2 text-uppercase">Get In Tough</router-link>
     </div>
+  <div class="">
+    <h2 class="text-center text-uppercase">
+      Our Services
+    </h2>
+    <div class="services three-columns mt-4 m-4">
+      <p><i class="bi bi-chevron-right"></i> Birthday</p>
+      <p><i class="bi bi-chevron-right"></i> Graduation</p>
+      <p><i class="bi bi-chevron-right"></i> Fundraising</p>
+      <p><i class="bi bi-chevron-right"></i> Cultural</p>
+      <p><i class="bi bi-chevron-right"></i> Political</p>
+      <p><i class="bi bi-chevron-right"></i> Team Building</p>
+    </div>
+  </div>
+
   <Footer />
 </template>
 
 <style >
 
-.body{
-  background-color: #f6f3f3;
-}
+
 .main-body
 {
   height: 30rem;
@@ -27,7 +39,7 @@ import Footer from "@/components/Footer.vue";
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("/eagle.png");
+  background-image: url("/event11.jpg");
   background-size: cover;
   background-position: center;
   color:blue;
@@ -39,5 +51,14 @@ import Footer from "@/components/Footer.vue";
 .client{
   border: 1px solid #ddd;
 }
+.services {
+  column-gap: 2rem;
+}
+
+
+.three-columns {
+  column-count: 3;
+}
+
 
 </style>

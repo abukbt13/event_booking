@@ -90,8 +90,7 @@ const toggleSidebar = () => {
           <div class="d-flex flex-column">
             <div class="border d-flex flex-column p-4">
               <h2>Bookings</h2>
-              <router-link to="/client/bookings" class="my-2">Book space</router-link>
-              <button class="btn btn-primary">View</button>
+              <router-link to="/client/bookings" class="my-2 btn btn-primary">My Bookings</router-link>
             </div>
           </div>
         </div>
