@@ -44,7 +44,7 @@ onMounted(()=>{
       </tr>
       <!-- Table Rows (Generated dynamically using Vue.js) -->
       <tr v-for="booking in bookings" :key="booking">
-        <td class="border">{{ booking.venue }} </td>
+        <td class="border">{{ booking.venue_name }} </td>
         <td class="border">{{ booking.date }} </td>
         <td class="border">{{ booking.start_time }}</td>
         <td class="border">{{ booking.end_time }}</td>
