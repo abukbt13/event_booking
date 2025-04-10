@@ -18,11 +18,11 @@ event_id.value = route.params.id
 const getBooking = async () => {
   // alert('')
   try {
-    const res = await axios.get(`${base_url.value}book/${event_id.value}`, authHeader);
+    const res = await axios.get(`${base_url.value}event/${event_id.value}`, authHeader);
     // console.log('res')
     // console.log(res)
     if (res.data.status === "success") {
-      book.value = res.data.booking;
+      book.value = res.data.events;
     } else {
       // alert('got it')
       // router.push("/client/events");
@@ -54,6 +54,7 @@ const CancelBooking = async (bookingId) => {
     const res = await axios.get(`${base_url.value}booking/delete/${bookingId}`, authHeader);
     if (res.data.status === 'success') {
       await Swal.fire('Cancelled!', 'Your booking has been cancelled.', 'success');
+      await router.push('/client/events')
       // Optionally refresh bookings list here
     } else {
       Swal.fire('Error!', 'Could not cancel booking.', 'error');
@@ -74,7 +75,7 @@ onMounted(()=>{
 
 <!--  {{book}}-->
   <div class="d-flex flex-column align-items-center">
-{{book}}
+<!--{{book}}-->
     <div class="card text-center w-50">
       <div class="card-header">
         Booking Details
@@ -117,7 +118,7 @@ onMounted(()=>{
          <button v-if="book.status ==='completed'" class="btn btn-success">Completed</button>
         </div>
         <div class="border">
-          <button @click="confirmCancelBooking(book.id)" class="btn btn-danger text-white">Cancel This Booking</button>
+          <button @click="confirmCancelBooking(book.booking_id)" class="btn btn-danger text-white">Cancel This Booking</button>
         </div>
 
       </div>
