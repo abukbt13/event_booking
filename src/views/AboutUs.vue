@@ -47,9 +47,15 @@ import Navbar from "@/components/Navbar.vue";
 
       <div class="contact-us">
         <h2 class="">Contact Us  </h2>
-        <p><i style="color: blue; font-size: 27px" class="bi mx-4 bi-telephone"></i> 0794....</p>
-        <p><i style="color: blue; font-size: 27px" class="bi  mx-4 bi-messenger"></i>Eventspheresavings@gmail.com</p>
+        <p>
+          <i style="font-size: 30px; padding: 1rem;" class="bi bi-telephone-fill"></i>
+          <span>0794495518</span>
+        </p>
+        <p>
+          <i style="font-size: 30px; padding: 1rem;"  class="bi bi-envelope-open-fill"></i>
 
+          <span>jackkosh2000@gmail.com</span>
+        </p>
         <p>You can contact us by sending us a message or emailing us using the details we have provided you with</p>
 
       </div>

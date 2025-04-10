@@ -87,8 +87,7 @@ const Bookvenue = async (venue) => {
           "Venue booked successfully. Proceed to checkout.",
           "success"
       );
-      // await router.push(`/checkout/${res.data.booking.id}`);
-
+      window.location.href = `/checkout/${res.data.booking.id}`; // or use router.push(...)
     }
   }
     catch (error) {

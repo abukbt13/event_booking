@@ -26,7 +26,7 @@
 
     </div>
     <div class="col  col-12  col col-sm-3 mt-2 mx-2">
-      <h5 class="">Contact through the following numbers</h5>
+      <h5 class="">Contact us through the following numbers</h5>
       <p>
         <i style="font-size: 30px; padding: 1rem;" class="bi bi-telephone-fill"></i>
         <span>0794495518</span>
@@ -34,7 +34,7 @@
       <p>
         <i style="font-size: 30px; padding: 1rem;"  class="bi bi-envelope-open-fill"></i>
 
-        <span>jakos2000@gmail.com</span>
+        <span>jackkosh2000@gmail.com</span>
       </p>
       <li class="list-unstyled fs-4"><router-link class="btn btn-primary text-decoration-none link" to="/about_us">About Us</router-link></li>
 

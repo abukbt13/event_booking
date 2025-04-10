@@ -99,7 +99,7 @@ onMounted(()=>{
           :to="event.booked ? '/client/booking/' + event.id : '/client/event/' + event.id"
           :class="event.booked ? 'btn bg-primary btn-warning' : 'btn bg-primary btn-success'"
       >
-        {{ event.booked ? 'Booking Detail' : 'Book Venue' }}
+        {{ event.booked ? 'Booking Details' : 'Book Venue' }}
       </router-link>
 
 

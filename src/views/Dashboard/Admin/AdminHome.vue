@@ -186,6 +186,7 @@ onMounted(()=>{
             <img :src="storage+ven.picture" alt="No picture" height="200" width="200" id="profile-img">
 
           </td>
+          <td class="border">{{ ven }} </td>
           <td class="border">{{ ven.venue }} </td>
           <td class="border">{{ ven.location }}</td>
           <td class="border">{{ ven.capacity }}</td>

@@ -4,22 +4,35 @@
 import axios from "axios";
 import {auth} from "@/composables/auth.js";
 import {onMounted, ref} from "vue";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import Navbar from "@/components/Navbar.vue";
 import Swal from "sweetalert2";
 const {authUser, authHeader,base_url,storage} = auth()
 const event_id = ref('')
 const book = ref([])
 const route = useRoute();
+const router = useRouter();
 event_id.value = route.params.id
 
 
-const  getBooking= async () => {
-  const res = await axios.get(base_url.value + 'book/'+event_id.value, authHeader)
-  if(res){
-    book.value = res.data.booking
+const getBooking = async () => {
+  // alert('')
+  try {
+    const res = await axios.get(`${base_url.value}book/${event_id.value}`, authHeader);
+    // console.log('res')
+    // console.log(res)
+    if (res.data.status === "success") {
+      book.value = res.data.booking;
+    } else {
+      // alert('got it')
+      // router.push("/client/events");
+    }
+  } catch (error) {
+    // alert('error')
+    // console.error("Booking fetch failed:", error);
+    router.push("/client/events");
   }
-}
+};
 const confirmCancelBooking = async (bookingId) => {
   const result = await Swal.fire({
     title: 'Are you sure?',
@@ -38,7 +51,7 @@ const confirmCancelBooking = async (bookingId) => {
 };
 const CancelBooking = async (bookingId) => {
   try {
-    const res = await axios.delete(`${base_url.value}booking/${bookingId}`, authHeader);
+    const res = await axios.get(`${base_url.value}booking/delete/${bookingId}`, authHeader);
     if (res.data.status === 'success') {
       await Swal.fire('Cancelled!', 'Your booking has been cancelled.', 'success');
       // Optionally refresh bookings list here
@@ -61,7 +74,7 @@ onMounted(()=>{
 
 <!--  {{book}}-->
   <div class="d-flex flex-column align-items-center">
-
+{{book}}
     <div class="card text-center w-50">
       <div class="card-header">
         Booking Details
@@ -92,8 +105,15 @@ onMounted(()=>{
           <p class="text-start">{{ book.total_price }}</p>
         </div>
         <div class="border p-2 m-2">
-          <button class="btn btn-success">Pending</button>
-         <button v-if="book.status ==='active'" class="btn btn-success ">Active</button>
+          <h5 class="text-start text-uppercase">Payment Status</h5>
+          <p class="text-start">{{ book.total_price }}</p>
+          <div v-if="book.payment_status ===0" class="">
+            <p>Not Paid</p>
+            <p>Need to make payment <router-link :to="'/checkout/'+book.id" class="btn btn-success">Pay</router-link></p>
+          </div>
+        </div>
+        <div class="border p-2 m-2">
+         <button v-if="book.status ==='pending'" class="btn btn-success ">Pending</button>
          <button v-if="book.status ==='completed'" class="btn btn-success">Completed</button>
         </div>
         <div class="border">
