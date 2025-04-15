@@ -18,7 +18,7 @@ const route = useRoute();
 book_id.value = route.params.id;
 
 const getBooking = async () => {
-  const res = await axios.get(base_url.value + "book/" + book_id.value, authHeader);
+  const res = await axios.get(base_url.value + "book/details/" + book_id.value, authHeader);
   if (res) {
     book.value = res.data.booking;
   }

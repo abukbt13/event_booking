@@ -18,11 +18,11 @@ event_id.value = route.params.id
 const getBooking = async () => {
   // alert('')
   try {
-    const res = await axios.get(`${base_url.value}event/${event_id.value}`, authHeader);
+    const res = await axios.get(`${base_url.value}book/${event_id.value}`, authHeader);
     // console.log('res')
     // console.log(res)
     if (res.data.status === "success") {
-      book.value = res.data.events;
+      book.value = res.data.booking;
     } else {
       // alert('got it')
       // router.push("/client/events");
@@ -30,7 +30,7 @@ const getBooking = async () => {
   } catch (error) {
     // alert('error')
     // console.error("Booking fetch failed:", error);
-    router.push("/client/events");
+    // router.push("/client/events");
   }
 };
 const confirmCancelBooking = async (bookingId) => {
@@ -81,9 +81,13 @@ onMounted(()=>{
         Booking Details
       </div>
       <div class="card-body">
+
         <div class="border p-2 m-2">
-          <h5 class="text-start text-uppercase">Venue</h5>
-          <p class="text-start">{{ book.venue }}</p>
+          <h2 class="text-center text-uppercase">Venue</h2>
+          <p class="text-center">{{ book.venue }}</p>
+            <img :src="storage+book.picture" alt="No picture" height="200" width="200" id="profile-img" class="img-fluid">
+
+
         </div>
         <div class="border p-2 m-2">
           <h5 class="text-start text-uppercase">Event date</h5>
@@ -118,7 +122,7 @@ onMounted(()=>{
          <button v-if="book.status ==='completed'" class="btn btn-success">Completed</button>
         </div>
         <div class="border">
-          <button @click="confirmCancelBooking(book.booking_id)" class="btn btn-danger text-white">Cancel This Booking</button>
+          <button @click="confirmCancelBooking(book.id)" class="btn btn-danger text-white">Cancel This Booking</button>
         </div>
 
       </div>
