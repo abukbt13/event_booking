@@ -96,8 +96,8 @@ const Bookvenue = async (venue) => {
   }
 };
 onMounted(()=>{
-  getVenues()
   authUser()
+  getVenues()
 })
 </script>
 

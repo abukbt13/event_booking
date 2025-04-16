@@ -7,9 +7,11 @@ import {onMounted, ref} from "vue";
 import {auth} from "@/composables/auth.js";
 import Navbar from "@/components/Navbar.vue";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import {useRouter} from "vue-router";
 
-const {authUser, authHeader,base_url,storage} = auth()
+const {authUser,AuthenticatedUser, currentUser, authHeader,base_url,storage} = auth()
 const venues = ref([])
+const router = useRouter();
 const bookings = ref([])
 const venue = ref('')
 const edit = ref(false)
@@ -133,7 +135,14 @@ function DisableEdit(){
   edit_id.value = ''
   edit.value = false
 }
+
 onMounted(()=>{
+  AuthenticatedUser()
+  if (currentUser.value?.role !== 'admin') {
+    // alert('')
+    router.push('/auth/login');
+  }
+  authUser()
   getVenues()
 })
 </script>

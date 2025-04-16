@@ -1,14 +1,16 @@
 <script setup>
 import axios from "axios";
 import Swal from "sweetalert2";
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
 import { auth } from "@/composables/auth.js";
 import Navbar from "@/components/Navbar.vue";
 import {Modal} from "bootstrap";
 import * as bootstrapModal from "@popperjs/core";
-const { authUser, authHeader, base_url } = auth();
+import {useRouter} from "vue-router";
+const { authUser,AuthenticatedUser, currentUser, authHeader, base_url } = auth();
 
 // Form inputs
+const router = useRouter()
 const title = ref("");
 const description = ref("");
 const capacity = ref("");
@@ -50,6 +52,9 @@ const CreateEvent = async () => {
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };
+onMounted( ()=>{
+  authUser()
+})
 </script>
 
 <template>

@@ -7,6 +7,7 @@
   const {authUser, authHeader,base_url,storage} = auth()
   const bookings =ref([])
   const event_data =ref([])
+  const booking_data =ref([])
 
   const  getbookings= async () => {
   const res = await axios.get(base_url.value + 'book', authHeader)
@@ -64,8 +65,13 @@
 
 }
 }
+  const populateBookings = (data) => {
+    booking_data.value = data
+  }
 
   onMounted(()=>{
+
+    authUser()
     getbookings()
 })
 </script>
@@ -89,9 +95,8 @@
 
       <tr>
         <th class="border">Venue</th>
-        <th class="border">Date </th>
+        <th class="border">Event Date </th>
         <th class="border">Start Time </th>
-        <th class="border">End Time </th>
         <th class="border">End Time </th>
       </tr>
       <!-- Table Rows (Generated dynamically using Vue.js) -->
@@ -101,17 +106,7 @@
         <td class="border">{{ booking.start_time }}</td>
         <td class="border">{{ booking.end_time }}</td>
         <td class="border">
-          <!--          <router-link-->
-          <!--              :to="event.booked ? '/client/bookings/' + event.id : '/client/event/' + event.id"-->
-          <!--              :class="event.booked ? 'btn bg-primary btn-warning' : 'btn bg-primary btn-success'"-->
-          <!--          >-->
-          <!--            {{ event.booked ? 'Booking Detail' : 'Book Venue' }}-->
-          <!--          </router-link>-->
-
-
-        </td>
-        <td class="border">
-          <button @click="populateEvent(booking)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#event_view">View</button>
+          <button @click="populateBookings(booking)"   class="btn bg-secondary  btn-sm" data-bs-toggle="modal" data-bs-target="#event_view">View</button>
         </td>
       </tr>
 
@@ -121,54 +116,51 @@
   </div>
 
   <!--  modal to view-->
-  <div class="modal fade" id="event_view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade modal-dialog-scrollable" id="event_view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">bookings Details</h1>
+<!--          {{booking_data}}-->
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Bookings Details</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="p-4">
-          <!--          {{event_data}}-->
+
           <h1>Title</h1>
-          <input type="text" class="form-control" v-model="event_data.title">
+          <input type="text" class="form-control" v-model="booking_data.title">
+
           <h2>Desription</h2>
-          <textarea  class="form-control" cols="3" rows="3" v-model="event_data.description"></textarea>
+          <textarea  class="form-control" cols="3" rows="3" v-model="booking_data.description"></textarea>
+
+          <h3>Venue</h3>
+          <div class="border p-2">{{booking_data.venue}}</div>
+
           <h3>Capacity</h3>
-          <input type="number" class="form-control" v-model="event_data.capacity">
+          <div class="border p-2">{{booking_data.capacity}} People</div>
+
+          <h3>Price Per Hour</h3>
+          <div class="border p-2">Ksh . {{booking_data.price_per_hour}}</div>
+
+          <h3>Total Price</h3>
+          <div class="border p-2">Ksh . {{booking_data.total_price}}</div>
 
           <h4>Event Date</h4>
-          <input type="date" class="form-control" v-model="event_data.event_date">
+          <div class="border p-2">Ksh . {{booking_data.event_date}}</div>
 
-          <div class="d-flex justify-content-around mt-2">
-            <button data-bs-dismiss="modal" class="btn bg-primary" @click="UpdateEvent(event_data)">Update</button>
-            <button data-bs-dismiss="modal" class="btn bg-danger" @click="deleteEvent(event_data.id)">Delete </button>
-          </div>
+          <h4>Start Time</h4>
+          <div class="border p-2">Ksh . {{booking_data.start_time}}</div>
+
+          <h4>End Time</h4>
+          <div class="border p-2">Ksh . {{booking_data.end_time}}</div>
+          <h4>Status</h4>
+          <div class="border bg-danger p-2 text-center text-uppercase">{{booking_data.status}}</div>
+
         </div>
       </div>
     </div>
   </div>
 
   <!--  modal-->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel"> settings</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form @submit.prevent="saveImage">
-            <label for="">
-              Profile picture
-            </label>
-            <input type="file" class="form-control" @change="uploadImage">
-            <button data-bs-dismiss="modal" type="submit" class="btn bg-primary m-2">Update </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </template>
 

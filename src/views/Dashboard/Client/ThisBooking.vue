@@ -66,6 +66,8 @@ const CancelBooking = async (bookingId) => {
 
 
 onMounted(()=>{
+
+  authUser()
   getBooking()
 })
 </script>
@@ -85,7 +87,7 @@ onMounted(()=>{
         <div class="border p-2 m-2">
           <h2 class="text-center text-uppercase">Venue</h2>
           <p class="text-center">{{ book.venue }}</p>
-            <img :src="storage+book.picture" alt="No picture" height="200" width="200" id="profile-img" class="img-fluid">
+            <img :src="storage+book.picture" alt="No picture"  id="profile-img" class="img-fluid">
 
 
         </div>
@@ -111,13 +113,11 @@ onMounted(()=>{
         </div>
         <div class="border p-2 m-2">
           <h5 class="text-start text-uppercase">Payment Status</h5>
-          <p class="text-start">{{ book.total_price }}</p>
           <div v-if="book.payment_status ===0" class="">
             <p>Not Paid</p>
             <p>Need to make payment <router-link :to="'/checkout/'+book.id" class="btn btn-success">Pay</router-link></p>
           </div>
-        </div>
-        <div class="border p-2 m-2">
+
          <button v-if="book.status ==='pending'" class="btn btn-success ">Pending</button>
          <button v-if="book.status ==='completed'" class="btn btn-success">Completed</button>
         </div>

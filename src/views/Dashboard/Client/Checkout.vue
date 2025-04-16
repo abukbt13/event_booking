@@ -2,10 +2,11 @@
 import axios from "axios";
 import { auth } from "@/composables/auth.js";
 import { onMounted, ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import Navbar from "@/components/Navbar.vue";
 import Swal from "sweetalert2";
 
+const router = useRouter()
 const { authUser, authHeader, base_url, storage } = auth();
 const book_id = ref("");
 const book = ref({
@@ -30,6 +31,7 @@ const CheckOut = async (data) => {
 
   if (res.data.status === "success") {
     await Swal.fire("Success!", "Payment made successfully successfully.", "success");
+   await router.push('/client/dashboard')
   }
 };
 
@@ -58,6 +60,8 @@ watch(
 );
 
 onMounted(() => {
+
+  authUser()
   getBooking();
 });
 </script>

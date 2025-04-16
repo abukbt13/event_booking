@@ -27,8 +27,8 @@ const populateVenues = (data) => {
 }
 
 onMounted(()=>{
-  getVenues()
   authUser()
+  getVenues()
 })
 </script>
 

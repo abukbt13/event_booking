@@ -4,7 +4,7 @@ import {onMounted, ref} from "vue";
 import {auth} from "@/composables/auth.js";
 import Navbar from "@/components/Navbar.vue";
 import Swal from "sweetalert2";
-const {authUser, authHeader,base_url,storage} = auth()
+const {authUser,AuthenticatedUser, currentUser, authHeader,base_url,storage} = auth()
 const events =ref([])
 const event_data =ref([])
 
@@ -63,9 +63,11 @@ const UpdateEvent = async (data) =>{
   }
 }
 
-onMounted(()=>{
-  getevents()
-})
+  onMounted( ()=>{
+    authUser()
+    getevents()
+  })
+
 </script>
 
 <template>
