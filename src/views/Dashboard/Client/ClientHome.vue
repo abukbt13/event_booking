@@ -76,6 +76,9 @@ onMounted( ()=>{
         <router-link class="text-decoration-none" to="/client/bookings">
           <li>Bookings</li>
         </router-link>
+        <router-link class="text-decoration-none" to="/client/reviews">
+          <li>Reviews</li>
+        </router-link>
       </ul>
     </div>
 

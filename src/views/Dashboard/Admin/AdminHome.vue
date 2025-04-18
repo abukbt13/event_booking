@@ -160,6 +160,7 @@ onMounted(()=>{
     <!-- Sidebar -->
     <div :class="['sidebar', { 'sidebar-open': isSidebarOpen }]">
       <ul class="sidebar-links list-unstyled">
+        <router-link class="text-decoration-none" to="/admin/dashboard">  <li> Home</li></router-link>
         <router-link class="text-decoration-none" to="/admin/events">  <li> Venues</li></router-link>
         <router-link class="text-decoration-none" to="/admin/bookings">  <li> Bookings</li></router-link>
       </ul>
@@ -167,147 +168,11 @@ onMounted(()=>{
 
     <!-- Content -->
     <div class="contents">
-      <table  class="table mt-1 border table-hover table-bordered">
-        <!-- Table Header -->
-        <thead>
-
-        <tr>
-          <th colspan="6" class="text-uppercase">
-            <div class="d-flex justify-content-between"><div class="">Venues</div>
-              <button class="btn btn-primary me-4" data-bs-toggle="modal" @click="DisableEdit" data-bs-target="#venue">Create</button>
-            </div>
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr>
-
-          <td class="border">Picture</td>
-          <td class="border">venue</td>
-          <td class="border">location </td>
-          <td class="border">capacity</td>
-          <td class="border">Action</td>
-        </tr>
-        <!-- Table Rows (Generated dynamically using Vue.js) -->
-        <tr v-for="ven in venues" :key="ven" class="text-center align-middle">
-          <td class="border">
-            <img :src="storage+ven.picture" alt="No picture" height="200" width="200" id="profile-img">
-
-          </td>
-          <td class="border">{{ ven.venue }} </td>
-          <td class="border">{{ ven.location }}</td>
-          <td class="border">{{ ven.capacity }}</td>
-
-          <td class="border"><button class="btn bg-secondary " @click="EditVenue(ven)" data-bs-toggle="modal" data-bs-target="#venue">Edit</button></td>
-          <td class="border"><button class="btn bg-primary " @click="populateVenue(ven)" data-bs-toggle="modal" data-bs-target="#exampleModal">View more</button></td>
-        </tr>
-        </tbody>
-
-      </table>
-    </div>
-  </div>
-
-  <!-- Create Event Modal -->
-
-  <div class="modal fade" id="venue" tabindex="-1" aria-labelledby="venueLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="venueLabel">
-            {{ edit ? 'Edit Venue' : 'Create Venue' }}
-          </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-
-          <form @submit.prevent="CreateVenue">
-            <label for="title">Venue Name</label>
-            <input type="text" v-model="venue" class="form-control" placeholder="Enter venue">
-
-            <label for="description" class="mt-2">location</label>
-            <input type="text" v-model="venue_location" class="form-control" placeholder="Enter location">
-
-            <label for="description" class="mt-2">Description</label>
-            <input type="text" v-model="description" class="form-control" placeholder="Enter description">
-
-            <label for="document" class="mt-2">amenities</label>
-            <input type="text"  v-model="amenities" class="form-control">
-
-            <label for="document" class="mt-2">Capacity</label>
-            <input type="number"  v-model="capacity" class="form-control">
-
-            <label for="document" class="mt-2">price_per_hour</label>
-            <input type="number"  v-model="price_per_hour" class="form-control">
-
-            <label for="document" class="mt-2">contact_email</label>
-            <input type="email"  v-model="contact_email" class="form-control">
-
-            <label for="document" class="mt-2">Contact_Phone</label>
-            <input type="number"  v-model="contact_phone" class="form-control">
-
-            <label for="document" class="mt-2">Picture Of Venue</label>
-            <input type="file" @change="pictureUpload" />
-            <div v-if="edit" class="">
-              <img :src="storage+picture" alt="No picture" height="200" width="200" id="profile-img">
-
-            </div>
-            <div class="d-flex justify-content-around mt-3">
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </form>
-        </div>
-
-      </div>
+      <h2>Reports</h2>
     </div>
   </div>
 
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Venue details</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h2 class="text-center">Venue Details</h2>
-<!--          {{venues_data}}-->
-          <div class="border p-2">
-            <h2>Venue Name</h2>
-            <p>{{venues_data.venue}}</p>
-          </div>
-          <div class="border p-2">
-            <h2>Location</h2>
-            <p>{{venues_data.location}}</p>
-          </div>
-          <div class="border p-2">
-            <h2>Amenities</h2>
-            <p>{{venues_data.amenities}}</p>
-          </div>
-          <div class="border p-2">
-            <h2>Price per hour</h2>
-            <p>{{venues_data.price_per_hour}}</p>
-          </div>
-          <div class="border p-2">
-            <h2>Contact Email</h2>
-            <p>{{venues_data.contact_email}}</p>
-          </div>
-          <div class="border p-2">
-            <h2>Contact Phone</h2>
-            <p>{{venues_data.contact_phone}}</p>
-          </div>
-          <div class="border p-2">
-            <h2>Venue Profile</h2>
-            <img :src="storage+venues_data.picture" alt="No picture" height="200" width="200" id="profile-img">
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
 </template>
 <style scoped>
 /* Sidebar styling */

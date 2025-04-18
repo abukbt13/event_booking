@@ -5,6 +5,7 @@ import ThisBooking from "@/views/Dashboard/Client/ThisBooking.vue";
 import Checkout from "@/views/Dashboard/Client/Checkout.vue";
 import ClientHome from "@/views/Dashboard/Client/ClientHome.vue";
 import Boooking from "@/views/Dashboard/Client/Boooking.vue";
+import Reviews from "@/views/Dashboard/Client/Reviews.vue";
 
 const routes =[
 
@@ -15,6 +16,10 @@ const routes =[
     {
         path: '/client/events',
         component: Events,
+    },
+    {
+        path: '/client/reviews',
+        component: Reviews,
     },
     {
         path: '/client/event/:id?',
