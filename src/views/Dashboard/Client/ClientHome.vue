@@ -22,6 +22,16 @@ const error = ref("");
 const isSidebarOpen = ref(false);
 
 const CreateEvent = async () => {
+  if (
+      title.value === '' ||
+      description.value === '' ||
+      event_date.value === '' ||
+      capacity.value === ''
+  ) {
+    await Swal.fire("Failed!", "All fields are required.", "error");
+    return;
+  }
+
   const formData = new FormData();
   formData.append("title", title.value);
   formData.append("description", description.value);
@@ -118,7 +128,7 @@ onMounted( ()=>{
         <div class="modal-body">
           <form @submit.prevent="CreateEvent">
             <label for="title">Title</label>
-            <select v-model="title" class="form-control" required>
+            <select v-model="title" class="form-control" >
               <option value="" disabled>---Select Event Type---</option>
               <option value="Wedding">Wedding</option>
               <option value="Fundraising">Fundraising</option>
@@ -131,15 +141,15 @@ onMounted( ()=>{
 <!--            <input type="text" v-model="title" class="form-control" placeholder="Enter title" />-->
 
             <label for="description" class="mt-2">Description</label>
-            <textarea v-model="description" required class="form-control" rows="5">
+            <textarea v-model="description"  class="form-control" rows="5">
 
             </textarea>
 
             <label for="document" class="mt-2">Event Date</label>
-            <input type="date" v-model="event_date" required class="form-control" />
+            <input type="date" v-model="event_date"  class="form-control" />
 
             <label for="document" class="mt-2">Capacity</label>
-            <input type="number" v-model="capacity" required min="2" class="form-control" />
+            <input type="number" v-model="capacity"  min="2" class="form-control" />
 
             <div class="d-flex justify-content-around mt-3">
               <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Submit</button>

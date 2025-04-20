@@ -50,15 +50,14 @@ const  CreateVenue = async () =>{
     const res = await axios.post(base_url.value + 'admin/venue/'+edit_id.value, formData, authHeader)
     if (res.data.status==='success') {
       // console.log(res)
-      await getVenues()
-      const modalElement = document.getElementById('venue'); // Ensure the ID matches your modal's HTML ID
-      const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-      modalInstance.hide(); // Close the modal programmatically
+
+
       await Swal.fire(
           'Success!',
           'venue Updated successfully',
           'success'
       );
+      await getVenues()
     } else {
       await Swal.fire(
           'Failed!',
@@ -72,18 +71,13 @@ const  CreateVenue = async () =>{
     // alert('creatting')
     const res = await axios.post(base_url.value + 'admin/venue', formData, authHeader)
     if (res.data.status === 'success') {
-      alert('')
-      // console.log(res)
 
-      const modalElement = document.getElementById('venue'); // Your modal's ID
-      const modal = new bootstrap.Modal(modalElement);
-      modal.hide() // Close modal
-      await getVenues()
       await Swal.fire(
           'Success!',
           'venue created successfully',
           'success'
       );
+      await getVenues()
     } else {
       await Swal.fire(
           'Failed!',
@@ -254,7 +248,7 @@ onMounted(()=>{
 
             </div>
             <div class="d-flex justify-content-around mt-3">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Submit</button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
           </form>

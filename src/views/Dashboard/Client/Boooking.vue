@@ -18,12 +18,15 @@ const start_time =ref('')
 const end_time =ref('')
 const event_date =ref('')
 const capacity =ref('')
+const max_capacity =ref('')
 const venues_data =ref({})
 const venues =ref([])
 const  getVenues= async () => {
   const res = await axios.get(base_url.value + 'show/venues/'+venue_id.value, authHeader)
   if(res){
     venues.value = res.data.venue
+    max_capacity.value = res.data.venue.capacity
+
   }
 }
 const Bookvenue = async (venue) => {
@@ -62,6 +65,10 @@ const Bookvenue = async (venue) => {
   const totalPrice = timeDifference * price_per_minute
 
   // If validation passes, proceed with booking
+  if(capacity.value >max_capacity.value){
+    await Swal.fire("Error", "Number of people should not exceed " + capacity.value, "error");
+    return;
+  }
   const formData = new FormData();
   formData.append("start_time", start_time.value);
   formData.append("end_time", end_time.value);
@@ -88,6 +95,13 @@ const Bookvenue = async (venue) => {
           "success"
       );
       window.location.href = `/checkout/${res.data.booking.id}`; // or use router.push(...)
+    }
+    else {
+      await Swal.fire(
+          "Error!",
+          res.data.message,
+          "error"
+      );
     }
   }
     catch (error) {
@@ -167,6 +181,7 @@ onMounted(()=>{
              <input type="time" class="form-control"  v-model="end_time">
              <h5>Number Of People</h5>
              <input type="number" class="form-control"  v-model="capacity">
+             <div class="bg-danger mt-2 text-white text-uppercase p-2" v-if="capacity>max_capacity">Maximum number of people should not exceed {{max_capacity}}</div>
            </div>
            <div class="m-4">
              <button type="submit" class="btn btn-danger float-end m-3">Checkout</button>
