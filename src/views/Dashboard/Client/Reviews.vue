@@ -63,40 +63,42 @@ onMounted(() => {
   <h2 v-if="successMessage" class="text-center bg-info text-white p-2 text-uppercase">
     {{ successMessage }}
   </h2>
-  <div v-if="rate" class="content p-4 mt-4 rounded shadow">
-    <h2 class="text-center mb-4">Leave a Review</h2>
+  <div v-if="rate"  class="content-area p-4 mt-4 rounded shadow">
+   <div style="width: 30rem;" class="">
+     <h2 class="mb-4">Leave a Review</h2>
 
-    <form @submit.prevent="submitReview">
-      <!-- Star Rating -->
-      <div class="mb-3 text-center">
-        <h5 class="form-label d-block">Rating</h5>
-        <span v-for="i in 5" :key="i" @click="setRating(i)" style="cursor: pointer">
+     <form @submit.prevent="submitReview">
+       <!-- Star Rating -->
+       <div class="mb-3">
+         <h2 class="form-label d-block">Rate</h2>
+         <span v-for="i in 5" :key="i" @click="setRating(i)" style="cursor: pointer">
             <i
                 class="bi"
                 :class="i <= rating ? 'bi-star-fill text-warning' : 'bi-star text-secondary'"
             ></i>
           </span>
-      </div>
+       </div>
 
-      <!-- Comment -->
-      <div class="mb-3">
-        <label for="comment" class="form-label">Comment</label>
-        <textarea
-            v-model="comment"
-            id="comment"
-            rows="4"
-            class="form-control"
-            placeholder="Write your feedback here..."
-        ></textarea>
-      </div>
+       <!-- Comment -->
+       <div class="mb-3">
+         <h3 for="comment" class="form-label">Comment</h3>
+         <textarea
+             v-model="comment"
+             id="comment"
+             rows="4"
+             class="form-control"
+             placeholder="Write your feedback here..."
+         ></textarea>
+       </div>
 
-      <!-- Submit Button -->
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary">
-          <i class="bi bi-send"></i> Submit Review
-        </button>
-      </div>
-    </form>
+       <!-- Submit Button -->
+       <div class="">
+         <button type="submit" class="btn btn-primary">
+           <i class="bi bi-send"></i> Submit Review
+         </button>
+       </div>
+     </form>
+   </div>
   </div>
 
   <div class="container mt-3">
@@ -122,8 +124,13 @@ onMounted(() => {
 .container {
   max-width: 900px;
 }
-.content {
-  background: #f7f7f7;
+.content-area {
+  position: absolute;
+  top: 10rem;
+  background: #00b2ff;
+  width: 100%;
+  display:flex;
+  justify-content: center
 }
 .bi-star,
 .bi-star-fill {
