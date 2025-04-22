@@ -6,7 +6,6 @@ import Checkout from "@/views/Dashboard/Client/Checkout.vue";
 import ClientHome from "@/views/Dashboard/Client/ClientHome.vue";
 import Boooking from "@/views/Dashboard/Client/Boooking.vue";
 import Reviews from "@/views/Dashboard/Client/Reviews.vue";
-import AllReviews from "@/views/AllReviews.vue";
 
 const routes =[
 
@@ -22,10 +21,7 @@ const routes =[
         path: '/client/reviews',
         component: Reviews,
     },
-    {
-        path: '/reviews',
-        component: AllReviews,
-    },
+
     {
         path: '/client/event/:id?',
         component: ShowVenues,

@@ -15,6 +15,10 @@ const fetchUsers = async () => {
     console.error("Failed to fetch users:", error)
   }
 }
+const printReport = () => {
+  window.print()
+}
+
 
 onMounted(() => {
   fetchUsers()
@@ -24,8 +28,10 @@ onMounted(() => {
 <template>
   <Navbar />
   <div class="container">
-    <h2 class="text-center mb-4">Users Report</h2>
-
+    <h2 class="text-center mb-4">
+      Users Report
+      <div class="btn p-1 btn-info ms-2 d-inline-block" @click="printReport">Print</div>
+    </h2>
     <div v-if="users.length === 0" class="text-center text-muted">No users found.</div>
 
     <div v-else class="table-responsive">
