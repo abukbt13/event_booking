@@ -117,10 +117,13 @@ onMounted(()=>{
             <p>Not Paid</p>
             <p>Need to make payment <router-link :to="'/checkout/'+book.id" class="btn btn-success">Pay</router-link></p>
           </div>
-
-         <button v-if="book.status ==='pending'" class="btn btn-success ">Pending</button>
-         <button v-if="book.status ==='completed'" class="btn btn-success">Completed</button>
+         <button v-else class="btn btn-success">Completed</button>
         </div>
+        <div class="border p-2 m-2">
+          <h5 class="text-start text-uppercase">Booking Status</h5>
+            <button class="btn btn-success">{{ book.status }}</button>
+        </div>
+
         <div class="border">
           <button @click="confirmCancelBooking(book.id)" class="btn btn-danger text-white">Cancel This Booking</button>
         </div>
