@@ -124,7 +124,7 @@ onMounted(()=>{
             <button class="btn btn-success">{{ book.status }}</button>
         </div>
 
-        <div class="border">
+        <div v-if="book.status !== 'completed'" class="border">
           <button @click="confirmCancelBooking(book.id)" class="btn btn-danger text-white">Cancel This Booking</button>
         </div>
 
